@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trichrome Fibrosis Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 16px;
+        }
+
+        .upload-area {
+            border: 3px dashed #cbd5e0;
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: #f7fafc;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #edf2f7;
+        }
+
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: #e6fffa;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .upload-text {
+            color: #4a5568;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .upload-hint {
+            color: #a0aec0;
+            font-size: 14px;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .preview-container {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .preview-image {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .result-label {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .result-value {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .result-confidence {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .info-item-label {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .info-item-value {
+            color: #2d3748;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #4a5568;
+            font-size: 16px;
+        }
+
+        .disclaimer {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .disclaimer-title {
+            color: #c53030;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .disclaimer-text {
+            color: #742a2a;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .result-value {
+                font-size: 36px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 Trichrome Fibrosis Analyzer</h1>
+            <p>AI-powered quantification of renal interstitial fibrosis</p>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📤</div>
+            <div class="upload-text">Click to upload or drag and drop</div>
+            <div class="upload-hint">Trichrome-stained kidney biopsy images (JPG, PNG, TIFF)</div>
+        </div>
+
+        <input type="file" id="fileInput" accept="image/*">
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Analyzing image...</div>
+        </div>
+
+        <div class="preview-container" id="previewContainer">
+            <img id="previewImage" class="preview-image" alt="Preview">
+            
+            <div class="result-card">
+                <div class="result-label">Estimated Fibrosis</div>
+                <div class="result-value" id="resultValue">—</div>
+                <div class="result-confidence">Machine Learning Prediction</div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-item-label">Analysis Date</div>
+                    <div class="info-item-value" id="analysisDate">—</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">Image Size</div>
+                    <div class="info-item-value" id="imageSize">—</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">Processing Time</div>
+                    <div class="info-item-value" id="processingTime">—</div>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <div class="disclaimer-title">⚠️ Clinical Disclaimer</div>
+                <div class="disclaimer-text">
+                    This tool provides automated image analysis for research purposes only. 
+                    Results should be verified by a qualified pathologist and should not be used 
+                    as the sole basis for clinical decisions. The model is trained on a limited dataset 
+                    and may not generalize to all staining protocols or tissue preparations.
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="resetAnalysis()">Analyze Another</button>
+                <button class="btn btn-primary" onclick="downloadReport()">Download Report</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Powered by machine learning • Version 1.0.0</p>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const loading = document.getElementById('loading');
+        const previewContainer = document.getElementById('previewContainer');
+        const previewImage = document.getElementById('previewImage');
+        
+        let currentImage = null;
+        let analysisStartTime = null;
+
+        // Upload area click
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleFile(file);
+            }
+        });
+
+        // File input change
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        });
+
+        function handleFile(file) {
+            currentImage = file;
+            const reader = new FileReader();
+            
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+                analyzeImage(e.target.result, file);
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        function analyzeImage(imageData, file) {
+            // Show loading
+            uploadArea.style.display = 'none';
+            loading.style.display = 'block';
+            previewContainer.style.display = 'none';
+            
+            analysisStartTime = Date.now();
+
+            // Simulate analysis (in production, this would call your Python backend)
+            setTimeout(() => {
+                const processingTime = ((Date.now() - analysisStartTime) / 1000).toFixed(2);
+                
+                // Mock prediction (replace with actual model inference)
+                const prediction = simulateMLPrediction();
+                
+                // Update UI
+                document.getElementById('resultValue').textContent = prediction.toFixed(1) + '%';
+                document.getElementById('analysisDate').textContent = new Date().toLocaleDateString();
+                document.getElementById('imageSize').textContent = formatFileSize(file.size);
+                document.getElementById('processingTime').textContent = processingTime + 's';
+                
+                // Show results
+                loading.style.display = 'none';
+                previewContainer.style.display = 'block';
+            }, 2000);
+        }
+
+        function simulateMLPrediction() {
+            // This is a placeholder - in production, send to your Flask/FastAPI backend
+            // that runs the actual TrichromeAnalyzer model
+            return Math.random() * 50 + 10; // Random 10-60%
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function resetAnalysis() {
+            uploadArea.style.display = 'block';
+            loading.style.display = 'none';
+            previewContainer.style.display = 'none';
+            fileInput.value = '';
+            currentImage = null;
+        }
+
+        function downloadReport() {
+            // Generate a simple text report
+            const resultValue = document.getElementById('resultValue').textContent;
+            const analysisDate = document.getElementById('analysisDate').textContent;
+            
+            const report = `TRICHROME FIBROSIS ANALYSIS REPORT
+=====================================
+
+Analysis Date: ${analysisDate}
+Image: ${currentImage ? currentImage.name : 'Unknown'}
+
+RESULTS
+-------
+Estimated Fibrosis: ${resultValue}
+
+DISCLAIMER
+----------
+This analysis is provided for research purposes only and should be 
+verified by a qualified pathologist before clinical use.
+
+Generated by Trichrome Fibrosis Analyzer v1.0.0
+`;
+            
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `fibrosis_report_${Date.now()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
