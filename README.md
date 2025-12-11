@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B.svg)](https://streamlit.io)
 
-**AI-powered quantification of renal interstitial fibrosis from Masson's Trichrome-stained kidney biopsies**
+**AI-powered quantification of kidney interstitial fibrosis from Masson's Trichrome-stained kidney biopsies**
 
 This tool combines traditional computer vision with machine learning to automatically segment and quantify fibrosis in kidney biopsy images, providing pathologists with objective, reproducible measurements.
 
