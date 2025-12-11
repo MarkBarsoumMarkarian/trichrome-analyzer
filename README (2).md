@@ -1,4 +1,4 @@
-# 🔬 Trichrome Fibrosis Analyzer
+# Trichrome Fibrosis Analyzer
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -12,25 +12,25 @@ This tool combines traditional computer vision with machine learning to automati
 
 ---
 
-## ✨ Features
+## Features
 
 ### Core Capabilities
-- 🎯 **Automated Segmentation** - Detects blue/green collagen fibrosis using color-space analysis
-- 🔵 **Glomeruli Exclusion** - Automatically identifies and excludes glomeruli (both healthy and sclerosed)
-- 🤖 **ML Correction** - Machine learning models refine raw segmentation for improved accuracy
-- 🎨 **Color Normalization** - Vahadane stain normalization handles variations in staining intensity
-- 📊 **Clinical Grading** - Automatically categorizes fibrosis as Minimal/Mild/Moderate/Severe
+-  **Automated Segmentation** - Detects blue/green collagen fibrosis using color-space analysis
+-  **Glomeruli Exclusion** - Automatically identifies and excludes glomeruli (both healthy and sclerosed)
+-  **ML Correction** - Machine learning models refine raw segmentation for improved accuracy
+-  **Color Normalization** - Vahadane stain normalization handles variations in staining intensity
+-  **Clinical Grading** - Automatically categorizes fibrosis as Minimal/Mild/Moderate/Severe
 
 ### Advanced Features
-- 🔍 **Explainability** - Feature importance and severity heatmaps
-- ⚡ **Batch Processing** - Process entire folders efficiently
-- 📈 **Clinical Validation** - Built-in metrics (MAE, R², Cohen's Kappa)
-- 🌐 **Web Interface** - User-friendly Streamlit app
-- 📥 **Export Reports** - Download results as text reports or segmentation masks
+-  **Explainability** - Feature importance and severity heatmaps
+-  **Batch Processing** - Process entire folders efficiently
+-  **Clinical Validation** - Built-in metrics (MAE, R², Cohen's Kappa)
+-  **Web Interface** - User-friendly Streamlit app
+-  **Export Reports** - Download results as text reports or segmentation masks
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Installation
 
@@ -57,7 +57,7 @@ Open your browser to `http://localhost:8501` and upload a trichrome-stained imag
 
 ---
 
-## 📖 Usage
+## Usage
 
 ### 1. Web Interface (Recommended for Single Images)
 
@@ -134,7 +134,7 @@ explanation = analyzer.explain_features(image)
 
 ---
 
-## 🗂️ Project Structure
+##  Project Structure
 
 ```
 trichrome-analyzer/
@@ -164,7 +164,7 @@ trichrome-analyzer/
 
 ---
 
-## 🎨 How It Works
+##  How It Works
 
 ### 1. Color-Based Segmentation
 
@@ -198,7 +198,7 @@ Normalizes staining variations across different labs/scanners using sparse NMF d
 
 ---
 
-## 📊 Clinical Grading
+##  Clinical Grading
 
 | Grade | Fibrosis % | Interpretation |
 |-------|-----------|----------------|
@@ -209,7 +209,7 @@ Normalizes staining variations across different labs/scanners using sparse NMF d
 
 ---
 
-## 🔬 Training Your Own Model
+##  Training Your Own Model
 
 ### Step 1: Collect Training Data
 
@@ -309,7 +309,7 @@ python quality_assurance/segmentation_visualizer.py training_data/
 
 ---
 
-## 🚀 Advanced Features
+##  Advanced Features
 
 ### U-Net Deep Learning Segmentation
 
@@ -343,7 +343,7 @@ python trichrome_advanced.py active-learn \
 
 ---
 
-## 📋 Requirements
+##  Requirements
 
 ### Core Dependencies
 - Python 3.8+
@@ -365,7 +365,7 @@ See `requirements.txt` for complete list.
 
 ---
 
-## 📈 Performance
+##  Performance
 
 Typical performance on validation datasets:
 
@@ -383,28 +383,28 @@ Results vary based on:
 
 ---
 
-## ⚠️ Clinical Disclaimer
+##  Clinical Disclaimer
 
 **FOR RESEARCH USE ONLY**
 
 This tool is provided for research purposes and is **not** intended for clinical diagnosis. Results should be:
-- ✅ Verified by a qualified pathologist
-- ✅ Used as a supplementary tool, not sole basis for decisions
-- ✅ Validated on your specific dataset before use
+-  Verified by a qualified pathologist
+-  Used as a supplementary tool, not sole basis for decisions
+-  Validated on your specific dataset before use
 
 The developers assume no liability for clinical decisions made using this software.
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Areas of interest:
 
-- 🎯 Improved segmentation algorithms
-- 🧠 Additional ML model architectures
-- 🔬 Clinical validation studies
-- 📚 Documentation improvements
-- 🐛 Bug fixes
+-  Improved segmentation algorithms
+-  Additional ML model architectures
+-  Clinical validation studies
+-  Documentation improvements
+-  Bug fixes
 
 Please:
 1. Fork the repository
@@ -415,13 +415,13 @@ Please:
 
 ---
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 📚 Citation
+##  Citation
 
 If you use this tool in your research, please cite:
 
@@ -436,19 +436,19 @@ If you use this tool in your research, please cite:
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Vahadane normalization algorithm based on [Vahadane et al., 2016](https://ieeexplore.ieee.org/document/7460968)
-- Inspired by digital pathology research at [Institution Name]
+- Inspired by pathology research department  at AUBMC
 - Built with ❤️ for the nephropathology community
 
 ---
 
-## 📞 Contact & Support
+##  Contact & Support
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/trichrome-analyzer/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/trichrome-analyzer/discussions)
-- 📧 **Email**: your.email@example.com
+-  **Issues**: [GitHub Issues](https://github.com/markbarsoummarkarian/trichrome-analyzer/issues)
+-  **Discussions**: [GitHub Discussions](https://github.com/markbarsoummarkarian/trichrome-analyzer/discussions)
+-  **Email**: mkm25@mail.aub.edu
 
 ---
 
