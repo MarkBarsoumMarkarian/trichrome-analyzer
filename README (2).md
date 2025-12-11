@@ -269,7 +269,7 @@ python trichrome_core.py validate --data validation.csv --model my_model.pkl
 
 ---
 
-## 🧪 Quality Assurance Tools
+##  Quality Assurance Tools
 
 ### Diagnostic Script
 
