@@ -151,15 +151,6 @@ trichrome-analyzer/
 │
 ├── models/                    # Saved models (not in repo)
 │   └── trichrome_model.pkl
-│
-├── examples/                  # Example images and notebooks
-│   ├── sample_images/
-│   └── tutorial.ipynb
-│
-└── docs/                      # Documentation
-    ├── api_reference.md
-    ├── clinical_validation.md
-    └── training_guide.md
 ```
 
 ---
@@ -428,9 +419,9 @@ If you use this tool in your research, please cite:
 ```bibtex
 @software{trichrome_analyzer,
   title = {Trichrome Fibrosis Analyzer: AI-Powered Quantification of Renal Interstitial Fibrosis},
-  author = {Your Name},
-  year = {2024},
-  url = {https://github.com/yourusername/trichrome-analyzer}
+  author = Mark Barsoum Markarian,
+  year = {2025},
+  url = {https://github.com/markbarsoummarkarian/trichrome-analyzer}
 }
 ```
 
@@ -439,7 +430,7 @@ If you use this tool in your research, please cite:
 ##  Acknowledgments
 
 - Vahadane normalization algorithm based on [Vahadane et al., 2016](https://ieeexplore.ieee.org/document/7460968)
-- Inspired by pathology research department  at AUBMC
+- Inspired by pathology research department at AUBMC
 - Built with ❤️ for the nephropathology community
 
 ---
@@ -452,7 +443,7 @@ If you use this tool in your research, please cite:
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [ ] Support for additional staining types (PAS, H&E)
 - [ ] Integration with whole-slide imaging (WSI) formats
