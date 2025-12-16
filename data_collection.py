@@ -3,11 +3,10 @@ import shutil
 import re
 
 # --- Configuration ---
-# 1. The root folder where the search will begin (your "ywa" folder)
-SOURCE_DIR = "C:/Users/Bmark/Desktop/ywa"
+SOURCE_DIR = "File_path"
 
 # 2. The folder where the extracted images will be copied.
-DESTINATION_DIR = "C:/Users/Bmark/Desktop/Extracted_Tri_Images"
+DESTINATION_DIR = "Output_path"
 
 # 3. List of common image file extensions (case-insensitive)
 IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp', '.svg')
@@ -99,4 +98,5 @@ def extract_matching_images():
         print("No matching images were found.")
 
 if __name__ == "__main__":
+
     extract_matching_images()
